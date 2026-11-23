@@ -1,7 +1,7 @@
 {% assign p = site.data.profile %}
 <div class="profiles" role="navigation" aria-label="Profiles">
   <button type="button" class="mode-toggle" aria-pressed="false" title="Switch between the designed version and a plain black-and-white one">plain view</button>
-  {% for l in p.top_links %}<a href="{{ l.url }}">{{ l.label }}</a>
+  {% for l in p.top_links %}<a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.label }}</a>
   {% endfor %}
 </div>
 

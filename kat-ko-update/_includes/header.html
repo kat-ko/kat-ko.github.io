@@ -1,0 +1,20 @@
+{% assign p = site.data.profile %}
+<div class="profiles" role="navigation" aria-label="Profiles">
+  <button type="button" class="mode-toggle" aria-pressed="false" title="Switch between the designed version and a plain black-and-white one">plain view</button>
+  {% for l in p.top_links %}<a href="{{ l.url }}" target="_blank" rel="noopener noreferrer">{{ l.label }}</a>
+  {% endfor %}
+</div>
+
+<header class="masthead frame" data-seed="masthead" data-amp="1.8">
+  <p class="name"><a href="{{ '/' | relative_url }}">{{ p.name }}</a></p>
+  <p class="tagline">{{ p.tagline }}</p>
+</header>
+
+{% assign u = page.url %}
+<nav class="main" aria-label="Main">
+  <a href="{{ '/' | relative_url }}"{% if u == '/' %} aria-current="page"{% endif %}><span>home</span></a>
+  <a href="{{ '/#publications' | relative_url }}"><span>publications</span></a>
+  <a href="{{ '/reading/' | relative_url }}"{% if u contains '/reading' %} aria-current="page"{% endif %}><span>reading</span></a>
+  <a href="{{ '/art/' | relative_url }}"{% if u contains '/art' %} aria-current="page"{% endif %}><span>art</span></a>
+  {% if site.posts.size > 0 %}<a href="{{ '/blog/' | relative_url }}"{% if u contains '/blog' %} aria-current="page"{% endif %}><span>blog</span></a>{% endif %}
+</nav>

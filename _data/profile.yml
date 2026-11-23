@@ -1,9 +1,9 @@
 name: Kathrin Korte
 # any author string containing this is set in bold in publication lists
 highlight_author: Korte
-# raw HTML allowed; the struck-through word is part of the design (hidden in plain view)
-tagline: 'PhD <span class="strike" data-seed="strike-tag">student</span> fellow · IT University of Copenhagen'
-# portrait, 4:5 works best, e.g. /assets/img/kathrin.jpg ; empty = grey placeholder
+# raw HTML allowed
+tagline: 'PhD fellow · IT University of Copenhagen'
+# portrait, 4:5 works best; empty = grey placeholder
 photo: "/assets/img/profile_pic.jpg"
 photo_alt: "Portrait of Kathrin Korte"
 # The address never appears as text on the page. Visitors see an "email" link;

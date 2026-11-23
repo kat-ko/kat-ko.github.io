@@ -85,11 +85,7 @@ nav.main{ display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 0 0 56px; paddi
 nav.main a{ position: relative; text-decoration: none; letter-spacing: .05em; }
 nav.main a::before{ content: "["; } nav.main a::after{ content: "]"; }
 nav.main a span{ position: relative; }
-nav.main a span::after{
-  content: ""; position: absolute; left: 0; right: 0; top: 54%; height: 1px; background: var(--ink);
-  transform-origin: left; transform: scaleX(0); transition: transform .15s;
-}
-nav.main a:hover span::after, nav.main a:focus-visible span::after, nav.main a[aria-current] span::after{ transform: scaleX(calc(1 + var(--d) * 1.4)); }
+nav.main a[aria-current] span{ text-decoration-color: rgb(var(--squiggle)); }  /* current tab: squiggle stays */
 
 /* ---------- intro ---------- */
 .intro{ display: grid; grid-template-columns: 210px 1fr; gap: 44px; align-items: start; margin-bottom: 72px; }
