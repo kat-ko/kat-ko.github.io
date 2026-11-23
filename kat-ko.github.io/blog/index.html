@@ -1,0 +1,14 @@
+---
+layout: page
+title: blog
+section_class: blog
+---
+{% if site.posts.size > 0 %}
+<ul class="postlist">
+{% for post in site.posts %}<li><span class="date">{{ post.date | date: "%Y-%m-%d" }}</span> <a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+<p class="feed"><a href="{{ '/blog/feed.xml' | relative_url }}">feed (rss/atom)</a></p>
+{% else %}
+<p>Nothing here yet.</p>
+{% endif %}

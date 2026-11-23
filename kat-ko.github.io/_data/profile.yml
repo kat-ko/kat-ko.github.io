@@ -1,0 +1,31 @@
+name: Kathrin Korte
+# any author string containing this is set in bold in publication lists
+highlight_author: Korte
+# raw HTML allowed; the struck-through word is part of the design (hidden in plain view)
+tagline: 'PhD <span class="strike" data-seed="strike-tag">student</span> fellow · IT University of Copenhagen'
+# portrait, 4:5 works best, e.g. /assets/img/kathrin.jpg ; empty = grey placeholder
+photo: "/assets/img/profile_pic.jpg"
+photo_alt: "Portrait of Kathrin Korte"
+# The address never appears as text on the page. Visitors see an "email" link;
+# JavaScript assembles the mailto: address from these two parts on load.
+email:
+  user: "kort"
+  domain: "itu.dk"
+
+# top-right strip
+top_links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/kathrin-korte-823346186/"
+  - label: "REAL Lab · ITU"
+    url: "https://real.itu.dk"
+  - label: Google Scholar
+    url: "https://scholar.google.com/citations?user=zCsJiTkAAAAJ"
+
+# row under the bio. Entries with an empty url are not shown.
+bio_links:
+  - label: ORCID
+    url: ""   # e.g. https://orcid.org/0000-0000-0000-0000
+  - label: GitHub
+    url: "https://github.com/kat-ko"
+  # - label: "CV (pdf)"
+  #   url: /assets/cv.pdf

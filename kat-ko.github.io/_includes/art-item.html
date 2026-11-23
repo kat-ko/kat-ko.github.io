@@ -1,0 +1,22 @@
+{% assign a = include.item %}
+<figure class="work{% if a.wide %} wide{% endif %}">
+  <div class="media frame" data-seed="art-{{ include.i }}" data-damp=".3">
+  {% case a.type %}
+    {% when "image" %}
+      <img src="{{ a.src | relative_url }}" alt="{{ a.alt | default: a.title | escape }}" loading="lazy">
+    {% when "video" %}
+      <video controls preload="none" playsinline{% if a.poster %} poster="{{ a.poster | relative_url }}"{% endif %}><source src="{{ a.src | relative_url }}"></video>
+    {% when "audio" %}
+      {% if a.cover %}<img src="{{ a.cover | relative_url }}" alt="" loading="lazy">{% endif %}
+      <audio controls preload="none" src="{{ a.src | relative_url }}"></audio>
+    {% when "embed" %}
+      <div class="embed"{% if a.cover %} style="background-image:url('{{ a.cover | relative_url }}')"{% endif %}>
+        <button type="button" class="embed-load" data-src="{{ a.src }}" data-title="{{ a.title | escape }}">▶ load {{ a.provider | default: "embed" }}</button>
+        <small>loads content from {{ a.provider | default: "an external site" }}</small>
+      </div>
+    {% when "link" %}
+      <a class="linkcard" href="{{ a.url }}">{% if a.cover %}<img src="{{ a.cover | relative_url }}" alt="" loading="lazy">{% endif %}<span>{{ a.title }} ↗</span></a>
+  {% endcase %}
+  </div>
+  <figcaption><b>{{ a.title }}</b>{% if a.year %}, {{ a.year }}{% endif %}{% if a.medium %} · <i>{{ a.medium }}</i>{% endif %}{% if a.note %}<br>{{ a.note }}{% endif %}</figcaption>
+</figure>

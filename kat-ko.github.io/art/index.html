@@ -1,0 +1,12 @@
+---
+layout: page
+title: art
+section_class: art
+---
+{% if site.data.art.size > 0 %}
+<div class="gallery">
+{% for item in site.data.art %}{% include art-item.html item=item i=forloop.index0 %}{% endfor %}
+</div>
+{% else %}
+<p class="soon">coming soon</p>
+{% endif %}

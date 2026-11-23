@@ -1,0 +1,38 @@
+title: Kathrin Korte
+description: "Kathrin Korte, PhD fellow at the IT University of Copenhagen. Continual learning at the intersection of neuroscience and machine learning, on forgetting, transfer and representational geometry."
+url: "https://kat-ko.github.io"
+baseurl: ""
+lang: en
+author: Kathrin Korte
+
+# Private visitor counter. Sign up at goatcounter.com, then put your site code here
+# (e.g. "kat-ko" for kat-ko.goatcounter.com). Empty = no counting.
+goatcounter: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax   # emits \( \) and \[ \]; rendered client-side by the self-hosted KaTeX in assets/katex
+  hard_wrap: false
+  syntax_highlighter_opts:
+    disable: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: blog/feed.xml
+
+permalink: /blog/:year/:title/
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post, math: true }
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

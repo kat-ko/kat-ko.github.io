@@ -1,0 +1,37 @@
+# The art gallery, shown in this order. While the list is empty, the page shows "coming soon".
+# Common fields: title, year, medium, note (optional), wide: true (optional, spans the full width)
+#
+# type: image   -> src (file in /assets/art/), alt
+# type: video   -> src (.mp4/.webm in /assets/art/, keep < ~50 MB; longer pieces: use embed), poster (optional image)
+# type: audio   -> src (.mp3/.ogg in /assets/art/), cover (optional image)
+# type: embed   -> src (the provider's EMBED url), provider (label shown on the button), cover (optional image)
+#                  Loads only after a click, so YouTube & co. set no cookies until the visitor asks.
+#                  YouTube: https://www.youtube-nocookie.com/embed/VIDEO_ID
+#                  Vimeo:   https://player.vimeo.com/video/VIDEO_ID?dnt=1
+#                  Bandcamp / SoundCloud: copy the src="" from their "embed" dialog
+# type: link    -> url, cover (optional image)
+#
+# Images: export as .webp or .jpg, max ~2000 px on the long side.
+# Replace the [] below with entries, e.g.:
+#
+# - type: image
+#   title: "Untitled"
+#   year: 2026
+#   medium: "ink on paper"
+#   src: /assets/art/untitled.jpg
+#   alt: "Short description of the image"
+#
+# - type: video
+#   title: "Animation"
+#   year: 2026
+#   medium: "animation, 40 s loop"
+#   src: /assets/art/animation.mp4
+#
+# - type: embed
+#   title: "Live set"
+#   medium: "music, 24 min"
+#   provider: YouTube
+#   src: "https://www.youtube-nocookie.com/embed/VIDEO_ID"
+#   wide: true
+
+[]

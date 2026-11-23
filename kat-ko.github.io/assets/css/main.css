@@ -1,0 +1,242 @@
+/* ============================================================
+   Kathrin Korte · main stylesheet
+   Two layers:
+   1. content layer: bio, citations, links. Never transformed.
+   2. distortion layer ("CSS mistakes"): frames, strikes, squiggles, indents.
+      Driven by --d (0..1, set from _data/design.json) and per-element seeded
+      offsets (--t --r --b --l --rot --ind) written by assets/js/site.js.
+   ============================================================ */
+
+@font-face{font-family:"Courier Prime";font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/courier-prime-latin-400-normal.woff2) format("woff2");}
+@font-face{font-family:"Courier Prime";font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/courier-prime-latin-400-italic.woff2) format("woff2");}
+@font-face{font-family:"Courier Prime";font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/courier-prime-latin-700-normal.woff2) format("woff2");}
+@font-face{font-family:"Courier Prime";font-style:italic;font-weight:700;font-display:swap;src:url(../fonts/courier-prime-latin-700-italic.woff2) format("woff2");}
+
+:root{
+  --d: .97;
+  --m: 1;
+  --ink: #000;
+  --paper: #fff;
+  --squiggle: 210, 0, 0;
+  --rule: 4px;
+  --body: "Courier Prime", "Courier New", Courier, monospace;
+  --display: "Courier New", "Courier Prime", Courier, monospace;
+}
+@media (max-width: 680px){ :root{ --m: .35; } }
+
+*,*::before,*::after{ box-sizing: border-box; }
+html{ overflow-x: clip; }
+body{ margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.55 var(--body); overflow-x: clip; }
+a{ color: inherit; }
+::selection{ background: #000; color: #fff; }
+img, video{ max-width: 100%; }
+button{ font: inherit; color: inherit; }
+
+#fx{ position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.page{ position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 72px 28px 120px; }
+
+/* ---------- misregistered frame ---------- */
+.frame{ position: relative; }
+.frame::before{
+  content: ""; position: absolute; pointer-events: none;
+  border: var(--rule) solid var(--ink);
+  top:    calc(var(--t,0) * var(--d) * var(--m) * 1px);
+  right:  calc(var(--r,0) * var(--d) * var(--m) * 1px);
+  bottom: calc(var(--b,0) * var(--d) * var(--m) * 1px);
+  left:   calc(var(--l,0) * var(--d) * var(--m) * 1px);
+  transform: rotate(calc(var(--rot,0) * var(--d) * 1deg));
+  transition: top .25s, right .25s, bottom .25s, left .25s, transform .25s;
+}
+.frame.tear::before{ transform: translateX(calc(var(--tear,12) * 1px)) rotate(calc(var(--rot,0) * var(--d) * 1deg)); transition: none; }
+
+/* ---------- header ---------- */
+.profiles{
+  display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 4px 22px;
+  margin: 0 0 26px; font-size: 14px; letter-spacing: .05em;
+  transform: translateX(calc(var(--d) * var(--m) * 18px));
+}
+.masthead{ padding: 34px 30px 30px; margin-bottom: 40px; }
+.name{ font: 400 clamp(38px, 7vw, 64px)/1.05 var(--display); letter-spacing: .06em; margin: 0; position: relative; z-index: 1; }
+.name a{ text-decoration: none; }
+.tagline{ margin: 14px 0 0; letter-spacing: .04em; }
+
+/* ---------- overshooting strikethrough ---------- */
+.strike{ position: relative; white-space: nowrap; }
+.strike::after{
+  content: ""; position: absolute; height: 1.5px; background: var(--ink); top: 52%;
+  left:  calc(-1 * var(--sl,6) * var(--d) * 1px);
+  right: calc(-1 * var(--sr,40) * var(--d) * var(--m) * 1px);
+  transform: rotate(calc(var(--srot,0) * var(--d) * 1deg));
+}
+
+/* ---------- spellcheck squiggle ---------- */
+.spell{ /* highlights research interests; stays visible at --d:0 */
+  text-decoration: underline wavy rgba(var(--squiggle), clamp(.6, calc(var(--d) * 1.6), 1));
+  text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-skip-ink: none;
+}
+.sq{ text-decoration: underline wavy transparent; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-skip-ink: none; }
+.profiles a, nav.main a span{ text-decoration: underline wavy transparent; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-skip-ink: none; }
+.profiles a::after{ content: " ↗"; }
+.profiles a:hover, .profiles a:focus-visible,
+nav.main a:hover span, nav.main a:focus-visible span{ text-decoration-color: rgb(var(--squiggle)); }
+
+/* ---------- nav ---------- */
+nav.main{ display: flex; flex-wrap: wrap; gap: 6px 26px; margin: 0 0 56px; padding-left: calc(var(--d) * var(--m) * 22px); }
+nav.main a{ position: relative; text-decoration: none; letter-spacing: .05em; }
+nav.main a::before{ content: "["; } nav.main a::after{ content: "]"; }
+nav.main a span{ position: relative; }
+nav.main a span::after{
+  content: ""; position: absolute; left: 0; right: 0; top: 54%; height: 1px; background: var(--ink);
+  transform-origin: left; transform: scaleX(0); transition: transform .15s;
+}
+nav.main a:hover span::after, nav.main a:focus-visible span::after, nav.main a[aria-current] span::after{ transform: scaleX(calc(1 + var(--d) * 1.4)); }
+
+/* ---------- intro ---------- */
+.intro{ display: grid; grid-template-columns: 210px 1fr; gap: 44px; align-items: start; margin-bottom: 72px; }
+@media (max-width: 680px){ .intro{ grid-template-columns: 1fr; gap: 28px; } }
+.photo{ padding: 10px; width: 210px; margin: 0; }
+.photo .img{ width: 100%; aspect-ratio: 4/5; background: #e9e9e9; display: grid; place-items: center; font-size: 13px; color: #777; letter-spacing: .1em; }
+.photo img{ display: block; width: 100%; height: auto; }
+.bio p{ margin: 0 0 1em; }
+.links{ list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.links a{ text-decoration: none; border-bottom: 1px solid currentColor; cursor: pointer; }
+.links a:hover{ background: #000; color: #fff; border-color: #000; }
+
+/* ---------- headings ---------- */
+h2{
+  font: 400 26px/1.2 var(--display); letter-spacing: .08em; margin: 0 0 26px;
+  display: inline-block; padding: 8px 18px;
+  margin-left: calc(var(--ind,0) * var(--d) * var(--m) * 1px);
+}
+h3{ font: 400 18px/1.3 var(--display); letter-spacing: .1em; margin: 56px 0 18px; }
+h3::before{ content: "—— "; }
+
+/* ---------- publications ---------- */
+.pubs{ list-style: none; margin: 0; padding: 0; }
+.year{ font-family: var(--display); letter-spacing: .1em; margin: 30px 0 12px; font-size: 15px; }
+.year::before{ content: "—— "; }
+.pub{ margin: 0 0 22px; }
+.title{ font-weight: 700; }
+.authors b{ text-decoration: underline; text-underline-offset: 3px; }
+.venue{ font-style: italic; }
+.tags{ font-size: 14px; letter-spacing: .03em; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; }
+.tags > a, .tags summary, .tags .copy{ text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
+.tags > a::before, .tags summary::before, .tags .copy::before{ content: "["; }
+.tags > a::after,  .tags summary::after,  .tags .copy::after{ content: "]"; }
+.tags > a:hover, .tags summary:hover, .tags .copy:hover{ background: #000; color: #fff; }
+.tags summary{ list-style: none; display: inline; }
+.tags summary::-webkit-details-marker{ display: none; }
+.bib[open]{ flex-basis: 100%; }
+.bib pre{ font: 12.5px/1.4 var(--body); background: #f4f4f4; padding: 10px 12px; overflow-x: auto; margin: 6px 0 4px; }
+.todo{ font-size: 13px; color: #a00; }
+
+/* ---------- reading shelf ---------- */
+.shelf{ margin: 34px 0 10px; }
+.spines{ display: flex; align-items: flex-end; gap: 4px; min-height: 280px; padding: 0 4px; flex-wrap: wrap; row-gap: 26px; }
+.spine{
+  position: relative; background: var(--paper); border: 2px solid var(--ink); cursor: pointer;
+  width: var(--sw, 44px); height: var(--sh, 200px); padding: 10px 0;
+  transform-origin: bottom left; transform: rotate(calc(var(--lean,0) * var(--d) * 1deg));
+  transition: transform .15s, background .15s, color .15s;
+}
+.spine span{
+  display: block; height: 100%; writing-mode: vertical-rl; margin: 0 auto;
+  font: 13px/1.2 var(--body); letter-spacing: .04em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.spine:hover{ transform: translateY(-8px) rotate(calc(var(--lean,0) * var(--d) * 1deg)); }
+.spine[aria-expanded="true"]{ background: var(--ink); color: var(--paper); transform: translateY(-14px); }
+.spine:focus-visible{ outline: 2px dashed rgb(var(--squiggle)); outline-offset: 3px; }
+.board{ height: 7px; background: var(--ink); margin-right: calc(var(--d) * var(--m) * -70px); margin-left: calc(var(--d) * var(--m) * 12px); }
+.card{ margin: 26px 0 8px; padding: 18px 22px; max-width: 640px; }
+.card .kind{ font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #444; margin-bottom: 6px; }
+.kindtag{ font-size: 12px; color: #444; }
+/* anything that is not a paper gets a label band on its spine, like a book's spine label */
+.spine:not(.k-paper)::before{ content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 10px; background: var(--ink); }
+.spine:not(.k-paper) span{ padding-top: 18px; }
+.spine:not(.k-paper)[aria-expanded="true"]::before{ background: var(--paper); }
+.card .note, .plain .note{ margin: 8px 0 10px; font-style: italic; }
+.plain{ margin-top: 18px; font-size: 14px; }
+.plain summary{ cursor: pointer; letter-spacing: .05em; }
+.plain ol{ padding-left: 22px; }
+.plain li{ margin: 0 0 8px; }
+.shelf-label{ margin-top: 70px; }
+
+/* ---------- art ---------- */
+.gallery{ display: grid; grid-template-columns: 1fr 1fr; gap: 56px 40px; margin-top: 10px; }
+@media (max-width: 680px){ .gallery{ grid-template-columns: 1fr; } }
+.work{ margin: 0; }
+.work.wide{ grid-column: 1 / -1; }
+.media{ padding: 10px; }
+.media img, .media video{ display: block; width: 100%; height: auto; background: #f2f2f2; }
+.media audio{ display: block; width: 100%; margin-top: 8px; }
+.embed{ aspect-ratio: 16/9; background: #f2f2f2 center/cover; display: grid; place-content: center; justify-items: center; gap: 8px; }
+.embed iframe{ width: 100%; height: 100%; border: 0; }
+.embed-load{ background: #fff; border: 2px solid #000; padding: 6px 14px; cursor: pointer; letter-spacing: .05em; }
+.embed-load:hover{ background: #000; color: #fff; }
+.embed small{ font-size: 12px; color: #555; background: #fff; padding: 0 4px; }
+.linkcard{ display: block; text-decoration: none; }
+.linkcard span{ display: block; padding: 18px 4px; font-weight: 700; }
+figcaption{ margin-top: 12px; font-size: 14px; line-height: 1.45; }
+
+/* ---------- blog ---------- */
+.postlist{ list-style: none; padding: 0; }
+.postlist li{ margin: 0 0 10px; }
+.postlist .date{ font-size: 14px; color: #444; margin-right: 10px; }
+.post-meta{ font-size: 14px; color: #444; margin: -10px 0 30px; }
+.post-body{ max-width: 680px; }
+.post-body pre{ font: 14px/1.45 var(--body); background: #f4f4f4; padding: 12px 14px; overflow-x: auto; }
+.post-body code{ font-family: var(--body); background: #f4f4f4; padding: 0 3px; }
+.post-body pre code{ background: none; padding: 0; }
+.post-body table{ border-collapse: collapse; margin: 1em 0; }
+.post-body th, .post-body td{ border: 1px solid #000; padding: 4px 10px; }
+.post-body img{ display: block; margin: 1.4em 0; }
+.post-body .katex-display{ overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.post-back{ margin-top: 50px; }
+
+/* ---------- academic service ---------- */
+#service{ margin-top: 70px; }
+.service{ list-style: none; margin: 0; padding: 0; }
+.service li{ margin: 0 0 16px; }
+.service .role{ font-weight: 700; }
+.service .where{ font-size: 14px; color: #444; }
+
+/* ---------- empty states ---------- */
+.soon{ color: rgb(var(--squiggle)); letter-spacing: .12em; font-size: 20px; margin: 10px 0 0; }
+
+footer{ margin-top: 90px; font-size: 13px; letter-spacing: .05em; color: #444; }
+footer p{ margin: 0 0 4px; }
+
+/* ---------- dev panel (only rendered with ?dev in the URL) ---------- */
+#dev{ position: fixed; right: 14px; bottom: 14px; z-index: 50; width: 290px; background: #fff; border: 2px solid #000; font: 12px/1.35 var(--body); box-shadow: 6px 6px 0 #000; }
+#dev header{ display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; background: #000; color: #fff; cursor: pointer; user-select: none; }
+#dev .body{ padding: 8px 10px 10px; display: grid; gap: 7px; max-height: 70vh; overflow: auto; }
+#dev.collapsed .body{ display: none; }
+#dev label{ display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; }
+#dev label.chk{ grid-template-columns: auto 1fr; }
+#dev input[type=range]{ grid-column: 1 / -1; width: 100%; accent-color: #000; }
+#dev fieldset{ border: 1px solid #000; margin: 0; padding: 6px 8px 8px; display: grid; gap: 5px; }
+#dev legend{ padding: 0 4px; }
+#dev button{ background: #fff; border: 1px solid #000; padding: 2px 8px; cursor: pointer; }
+#dev button:hover{ background: #000; color: #fff; }
+#dev .row{ display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+#dev input[type=number]{ font: inherit; width: 70px; border: 1px solid #000; padding: 1px 4px; }
+#dev textarea{ font: 11px/1.3 var(--body); width: 100%; border: 1px solid #000; resize: vertical; }
+#dev .note{ color: #555; }
+
+/* ---------- view toggle: glitch (default) / plain ---------- */
+.mode-toggle{
+  margin-right: auto; background: none; border: 0; padding: 0; cursor: pointer;
+  font-size: 14px; letter-spacing: .05em;
+  text-decoration: underline wavy transparent; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-skip-ink: none;
+}
+.mode-toggle::before{ content: "["; } .mode-toggle::after{ content: "]"; }
+.mode-toggle:hover, .mode-toggle:focus-visible{ text-decoration-color: rgb(var(--squiggle)); }
+/* plain: no distortion, no animation, no colour. Overrides the inline --d set by site.js */
+html[data-mode="plain"]{ --d: 0 !important; --squiggle: 0, 0, 0; }
+html[data-mode="plain"] #fx{ display: none; }
+html[data-mode="plain"] .spell{ text-decoration-color: rgba(0, 0, 0, .45); }
+html[data-mode="plain"] .todo, html[data-mode="plain"] .soon{ color: #000; }
+html[data-mode="plain"] .strike{ display: none; }   /* plain tagline reads "PhD fellow" */
+html[data-mode="plain"] *{ transition: none !important; }
+
+@media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }

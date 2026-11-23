@@ -1,0 +1,32 @@
+---
+layout: default
+---
+{% assign p = site.data.profile %}
+<section class="intro">
+  <figure class="photo frame" data-seed="photo" data-damp=".45">
+    {% if p.photo and p.photo != "" %}<img src="{{ p.photo | relative_url }}" alt="{{ p.photo_alt }}">{% else %}<div class="img">PHOTO</div>{% endif %}
+  </figure>
+  <div class="bio">
+    {{ content }}
+    <ul class="links">
+      {% for l in p.bio_links %}{% if l.url and l.url != "" %}<li><a href="{{ l.url }}">{{ l.label }}</a></li>
+      {% endif %}{% endfor %}
+      {% if p.email.user and p.email.user != "" %}<li><a class="email" data-u="{{ p.email.user }}" data-d="{{ p.email.domain }}" title="send an email">email</a></li>{% endif %}
+    </ul>
+  </div>
+</section>
+
+<section id="publications">
+  <h2 class="frame" data-seed="h-pubs">publications</h2>
+  {% include publications.html %}
+</section>
+
+{% if site.data.service.size > 0 %}
+<section id="service">
+  <h2 class="frame" data-seed="h-service">academic service</h2>
+  <ul class="service">
+    {% for s in site.data.service %}<li><span class="role">{{ s.role }}</span> · {% if s.url %}<a href="{{ s.url }}">{{ s.event }}</a>{% else %}{{ s.event }}{% endif %}{% if s.detail %}, <i>{{ s.detail }}</i>{% endif %}<br><span class="where">{{ s.place }} · {{ s.year }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}

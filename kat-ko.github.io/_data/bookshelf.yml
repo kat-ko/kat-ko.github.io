@@ -1,0 +1,47 @@
+# The reading shelf: anything worth reading right now, not only papers.
+# `current` is on display. To retire an item, cut its whole entry and paste it under `archive`.
+#
+# Fields (only title is required):
+#   title
+#   kind     paper | article | essay | blog | book | talk | video | other   (shown on the card; non-papers get a marked spine)
+#   authors  free text, e.g. "Chou, C.-N., Kirsanov, A." or "Style Analytics"
+#   source   venue or publication, e.g. "ICLR 2026", "Substack"
+#   year
+#   url      main link
+#   pdf      optional second link
+#   note     one line on why it's on the shelf
+#   added    YYYY-MM-DD
+#   apa      optional; shows a "copy APA" button
+#   bibtex   optional; shows a "copy BibTeX" button. Write `bibtex: |` and indent the lines below it.
+
+current:
+  - title: "Diagnosing Generalization Failures from Representational Geometry Markers"
+    kind: paper
+    authors: "Chou, C.-N., Kirsanov, A., Yang, Y.-Y., & Chung, S."
+    source: "ICLR 2026"
+    year: 2026
+    url: "https://arxiv.org/abs/2603.01879"
+    pdf: "https://proceedings.iclr.cc/paper_files/paper/2026/file/a059ed209d2c6b662f15799db9b19749-Paper-Conference.pdf"
+    note: "Predicting where a model will fail to generalize from geometric markers of its representations, by analogy to medical biomarkers."
+    added: 2026-11-23
+    apa: "Chou, C.-N., Kirsanov, A., Yang, Y.-Y., & Chung, S. (2026). Diagnosing generalization failures from representational geometry markers. International Conference on Learning Representations (ICLR 2026). https://arxiv.org/abs/2603.01879"
+    bibtex: |
+      @inproceedings{chou2026diagnosing,
+        title     = {Diagnosing Generalization Failures from Representational Geometry Markers},
+        author    = {Chou, Chi-Ning and Kirsanov, Artem and Yang, Yao-Yuan and Chung, SueYeon},
+        booktitle = {International Conference on Learning Representations (ICLR)},
+        year      = {2026},
+        url       = {https://arxiv.org/abs/2603.01879}
+      }
+
+  - title: "Cringe-sincerity cycle: The role of irony in trend revivals"
+    kind: article
+    authors: "Style Analytics"
+    source: "Style Analytics (Substack)"
+    year: 2025
+    url: "https://styleanalytics.substack.com/p/cringe-sincerity-cycle"
+    note: "How irony carries a trend from cringe back to a sincere revival."
+    added: 2026-11-23
+    apa: "Style Analytics. (2025, July 23). Cringe-sincerity cycle: The role of irony in trend revivals. Style Analytics. https://styleanalytics.substack.com/p/cringe-sincerity-cycle"
+
+archive: []

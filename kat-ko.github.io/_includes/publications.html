@@ -1,0 +1,21 @@
+{% assign me = site.data.profile.highlight_author %}
+{% assign prev = "" %}
+{% for pub in site.data.publications %}
+  {% assign y = pub.year | append: "" %}
+  {% if y != prev %}
+    {% unless forloop.first %}</ul>{% endunless %}
+    <div class="year">{{ y }}</div>
+    <ul class="pubs">
+    {% assign prev = y %}
+  {% endif %}
+  <li class="pub">
+    <div class="title">{{ pub.title }}</div>
+    <div class="authors">{% for a in pub.authors %}{% if a contains me %}<b>{{ a }}</b>{% else %}{{ a }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}{% if pub.todo %} <span class="todo">[{{ pub.todo }}]</span>{% endif %}</div>
+    {% if pub.venue and pub.venue != "" %}<div class="venue">{{ pub.venue }}</div>{% endif %}
+    <div class="tags">
+      {% for l in pub.links %}<a href="{{ l[1] }}">{{ l[0] | replace: "arxiv", "arXiv" | replace: "neurips", "NeurIPS" | replace: "doi", "DOI" }}</a>{% endfor %}
+      {% if pub.bibtex %}<details class="bib"><summary>bib</summary><pre>{{ pub.bibtex | xml_escape }}</pre><button type="button" class="copy" data-copy-prev>copy</button></details>{% endif %}
+    </div>
+  </li>
+  {% if forloop.last %}</ul>{% endif %}
+{% endfor %}

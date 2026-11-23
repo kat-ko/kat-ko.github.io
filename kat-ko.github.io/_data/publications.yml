@@ -1,0 +1,56 @@
+# Newest first. Entries with the same `year` are grouped under one heading, so keep them adjacent.
+# Fields: title, authors (list), venue, year, links (arxiv / pdf / code / url / slides / poster / any label), bibtex (optional), todo (optional note shown in red)
+# Paste BibTeX as a block:
+#   bibtex: |
+#     @article{...}
+
+- title: "Implicit Assumptions About Tasks in Continual Learning"
+  authors: ["Korte", "Metzner", "Bedhotiya", "Tran", "Nisioti", "Risi"]
+  venue: "NeurIPS 2026 Workshop CL4FMAgents"
+  year: 2026
+  links:
+    arxiv: "https://arxiv.org/abs/2610.41792"
+    neurips: "https://neurips.cc/virtual/2026/170477"
+
+- title: "Continual Reinforcement Learning with Neuroevolution"
+  authors: ["Nisioti", "Cossu", "Korte", "Risi"]
+  venue: "preprint"
+  year: 2026
+  links:
+    arxiv: "https://arxiv.org/abs/2610.01583"
+
+- title: "Where Decoder Cosine Similarity Fails for SAE Feature Flow Discovery"
+  authors: ["Droste", "Adriano", "Korte", "Giese"]
+  venue: "preprint"
+  year: 2026
+  links:
+    arxiv: "https://arxiv.org/abs/2609.12591"
+
+- title: "Dimensionality Controls When Modularity Helps in Continual Learning"
+  authors: ["Korte", "Adriano", "Pedersen", "Nisioti", "Risi"]
+  venue: "ICML 2026 Workshop CompLearn (poster)"
+  year: 2026
+  links:
+    arxiv: "https://arxiv.org/abs/2606.17889"
+
+- title: "When Does Structure Matter in Continual Learning? Dimensionality Controls When Modularity Shapes Representational Geometry"
+  authors: ["Korte", "Pedersen", "Nisioti", "Risi"]
+  venue: "preprint"
+  year: 2026
+  links:
+    arxiv: "https://arxiv.org/abs/2604.27656"
+
+- title: "Causal Knowledge Transfer for Multi-Agent Reinforcement Learning in Dynamic Environments"
+  authors: ["Korte", "Adriano", "Ghahremani", "Giese"]
+  venue: "ACSOS-C 2025"
+  year: 2025
+  links:
+    arxiv: "https://arxiv.org/abs/2507.13846"
+
+- title: "Hypernetworks That Evolve Themselves"
+  authors: ["Pedersen", "Plantec", "Nisioti", "Barylli", "Montero", "Korte", "Risi"]
+  venue: "Artificial Life Conference Proceedings 37 (ALIFE 2025)"
+  year: 2025
+  links:
+    doi: "https://doi.org/10.1162/ISAL.a.845"
+    arxiv: "https://arxiv.org/abs/2512.16406"   # preprint

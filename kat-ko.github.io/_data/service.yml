@@ -1,0 +1,20 @@
+# Academic service, newest first. Fields: role, event, detail (optional), place, year, url (optional)
+
+- role: "Organiser"
+  event: "ALICE Workshop 2027"
+  detail: "Artificial Life, Intelligence, Complexity & Evolution"
+  place: "Geilo, Norway"
+  year: "2027 (upcoming)"
+
+- role: "Organiser"
+  event: "Special Session “Artificial Life for Science and Engineering”"
+  detail: "ALIFE 2026"
+  place: "Waterloo, Canada"
+  year: 2026
+  url: "https://alifeforscience.github.io"
+
+- role: "Organiser"
+  event: "ALICE Workshop 2026"
+  detail: "Artificial Life, Intelligence, Complexity & Evolution"
+  place: "Copenhagen, Denmark"
+  year: 2026

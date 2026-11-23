@@ -1,0 +1,30 @@
+{% comment %} usage: {% include shelf.html items=site.data.bookshelf.current id="now" %} {% endcomment %}
+<div class="shelf" data-shelf>
+  <div class="spines">
+    {% for b in include.items %}
+    <button type="button" class="spine k-{{ b.kind | default: 'paper' }}" data-key="{{ b.title | escape }}" aria-expanded="false" aria-controls="{{ include.id }}-{{ forloop.index0 }}"><span>{{ b.title }}</span></button>
+    {% endfor %}
+  </div>
+  <div class="board" aria-hidden="true"></div>
+  {% for b in include.items %}
+  <article class="card frame" id="{{ include.id }}-{{ forloop.index0 }}" data-seed="card-{{ include.id }}-{{ forloop.index0 }}" data-damp=".35" hidden>
+    <div class="kind">{{ b.kind | default: "paper" }}{% if b.added %} · on the shelf since {{ b.added | date: "%Y-%m-%d" }}{% endif %}</div>
+    <div class="title">{% if b.url %}<a href="{{ b.url }}">{{ b.title }}</a>{% else %}{{ b.title }}{% endif %}</div>
+    <div class="authors">{{ b.authors }}{% if b.source %} · <i>{{ b.source }}</i>{% endif %}{% if b.year %} ({{ b.year }}){% endif %}</div>
+    {% if b.note %}<p class="note">{{ b.note }}</p>{% endif %}
+    <div class="tags">
+      {% if b.url %}<a href="{{ b.url }}">open</a>{% endif %}
+      {% if b.pdf %}<a href="{{ b.pdf }}">pdf</a>{% endif %}
+      {% if b.apa %}<button type="button" class="copy" data-copy="{{ b.apa | escape }}">copy APA</button>{% endif %}
+      {% if b.bibtex %}<button type="button" class="copy" data-copy="{{ b.bibtex | escape }}">copy BibTeX</button>{% endif %}
+    </div>
+  </article>
+  {% endfor %}
+  <details class="plain">
+    <summary>as a list</summary>
+    <ol>
+      {% for b in include.items %}<li>{% if b.url %}<a href="{{ b.url }}">{{ b.title }}</a>{% else %}{{ b.title }}{% endif %} · {{ b.authors }}{% if b.source %}, <i>{{ b.source }}</i>{% endif %}{% if b.year %} ({{ b.year }}){% endif %} <span class="kindtag">[{{ b.kind | default: "paper" }}]</span>{% if b.note %}<br><span class="note">{{ b.note }}</span>{% endif %}</li>
+      {% endfor %}
+    </ol>
+  </details>
+</div>
